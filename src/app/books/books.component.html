@@ -1,1 +1,35 @@
-<app-book-item />
+<div class="container">
+  <div class="filterSection">
+    <div class="searchBox">
+      <ng-icon class="searchIcon" name="lucideSearch"/>
+      <input type="text" placeholder="Buscar por título ou autor" class="searchInput"/>
+    </div>
+  </div>
+
+  <div class="filterButtons">
+    <ng-icon name="lucideFilter" class="filterIcon"/>
+    <div class="genreButtons">
+      @for (genre of genres; track $index) {
+        <button class="buttonActive">{{ genre }}</button>
+      }
+    </div>
+  </div>
+
+  <div class="resultsInfo">
+    <p class="resultsText">
+      Mostrando <span class="highlight">{{ books.length }}</span> de <span class="highlight">TODO</span> livros
+    </p>
+  </div>
+
+  <div class="books-container">
+    @if (books.length > 0) {
+      @for (book of books; track book.id) {
+        <app-book-item [book]="book"/>
+      }
+    } @else {
+      <div class="empty">
+          <p class="emptyText">Nenhum livro encontrado. Tente ajustar os filtros.</p>
+      </div>
+    }
+  </div>
+</div>

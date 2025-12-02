@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Book } from './book.model';
 
 @Component({
   selector: 'app-book-item',
   standalone: true,
   imports: [],
   templateUrl: './book-item.component.html',
-  styleUrl: './book-item.component.css'
+  styleUrl: './book-item.component.css',
 })
 export class BookItemComponent {
-
+  @Input({ required: true }) book!: Book;
 }
