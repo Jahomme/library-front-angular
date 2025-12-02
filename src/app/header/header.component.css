@@ -1,0 +1,34 @@
+header {
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem;
+  background-color: white;
+}
+
+.container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.icon-container {
+  border-radius: 1rem;
+  background-color: oklch(0.35 0.12 258);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem
+
+}
+
+.text-container p {
+  font-size: 14px;
+}
+
+.text-container h2 {
+  font-size: 32px;
+}
