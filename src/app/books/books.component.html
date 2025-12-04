@@ -1,18 +1,26 @@
 <div class="container">
   <div class="filterSection">
-    <div class="searchBox">
-      <ng-icon class="searchIcon" name="lucideSearch"/>
-      <input type="text" placeholder="Buscar por título ou autor" class="searchInput" [(ngModel)]="search"/>
+    <div>
+      <form (ngSubmit)="onSubmitBySearch()" class="searchBox">
+        <ng-icon class="searchIcon" name="lucideSearch"/>
+        <input name="search" type="text" placeholder="Buscar por título ou autor" class="searchInput" [(ngModel)]="search"/>
+      </form>
     </div>
   </div>
 
-  <div class="filterButtons">
-    <ng-icon name="lucideFilter" class="filterIcon"/>
-    <div class="genreButtons">
-      @for (genre of genres; track $index) {
-        <button class="buttonActive">{{ genre }}</button>
-      }
+  <div class="genreFilterContainer">
+    <div class="filterButtons">
+      <ng-icon name="lucideFilter" class="filterIcon"/>
+      <div class="genreButtons">
+        @for (genre of genres; track $index) {
+          <button
+            (click)="booksService.toggleGenre(genre)"
+            [class]="booksService.isSelected(genre) ? 'buttonActive' : 'buttonInactive'"> {{ genre }}
+          </button>
+        }
+      </div>
     </div>
+    <button class="buttonActive action" (click)="onSubmitByGenre()">Filtrar</button>
   </div>
 
   <div class="resultsInfo">
