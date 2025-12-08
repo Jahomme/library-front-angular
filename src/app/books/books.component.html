@@ -15,7 +15,7 @@
         @for (genre of genres; track $index) {
           <button
             (click)="booksService.toggleGenre(genre)"
-            [class]="booksService.isSelected(genre) ? 'buttonActive' : 'buttonInactive'"> {{ genre }}
+            [class]="booksService.isSelected(genre) ? 'buttonActive' : 'buttonInactive'"> {{ genre | genre }}
           </button>
         }
       </div>

@@ -6,11 +6,12 @@ import { lucideFilter, lucideSearch } from '@ng-icons/lucide';
 import { GeneroLivro } from '../enum/generos';
 import { FormsModule } from '@angular/forms';
 import { BooksService } from './books.service';
+import { GenrePipe } from './genre.pipe';
 
 @Component({
   selector: 'app-books',
   standalone: true,
-  imports: [BookItemComponent, NgIcon, FormsModule],
+  imports: [BookItemComponent, NgIcon, FormsModule, GenrePipe],
   providers: [provideIcons({ lucideSearch, lucideFilter })],
   templateUrl: './books.component.html',
   styleUrl: './books.component.css',
@@ -20,9 +21,7 @@ export class BooksComponent {
 
   books = MOCK_BOOKS;
 
-  genres = Object.keys(GeneroLivro).filter((k) => Number.isNaN(+k)) as Array<
-    keyof typeof GeneroLivro
-  >;
+  genres: string[] = Object.keys(GeneroLivro).filter((k) => Number.isNaN(+k));
 
   search = this.booksService.search;
 
