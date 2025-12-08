@@ -1,0 +1,51 @@
+<div class='formContainer'>
+  <div class='header'>
+    <h1 class='title'>Login</h1>
+    <p class='subtitle'>Faça login na sua conta</p>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" class='form' >
+    <div class='formGroup'>
+      <label htmlFor="email" class='label'>
+        Email
+      </label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        class="input"
+        [(ngModel)]="enteredEmail"
+        />
+      </div>
+
+      <div class='formGroup'>
+        <label htmlFor="password" class='label'>
+          Senha
+        </label>
+        <input
+        type="password"
+        name="password"
+        id="password"
+        class="input"
+        [(ngModel)]="enteredPassword"
+      />
+    </div>
+
+  <!-- <p class=error></p> -->
+
+    <button type="submit" class='submitButton'>
+      Entrar
+    </button>
+  </form>
+
+  <p class='footer'>
+    Não tem uma conta?
+    <a href="/signup" class='link'>
+      Cadastre-se
+    </a>
+  </p>
+
+  <a href="/" class='backlink'>
+    ← Voltar para livros
+  </a>
+</div>

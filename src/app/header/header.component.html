@@ -1,11 +1,16 @@
 <header>
   <div class="container">
     <div class="icon-container">
-      <ng-icon name="lucideBookOpen" size="32px" color="white"/>
+      <ng-icon [name]="icon()" size="32px" color="white"/>
     </div>
     <div class="text-container">
-      <h2>Meus livros</h2>
-      <p>Gerenciador de livros e autores</p>
+      <h2>{{ title() }}</h2>
+      <p>{{ subtitle() }}</p>
     </div>
+    @if (showLoginBtn()) {
+      <a href="/login" class="loginButton">
+        Login
+      </a>
+    }
   </div>
 </header>
