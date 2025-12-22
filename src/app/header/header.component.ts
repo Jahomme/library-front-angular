@@ -3,6 +3,8 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBookOpen, lucideLogIn, lucideSettings } from '@ng-icons/lucide';
 import { filter } from 'rxjs';
+import { AuthService } from '../core/auth/auth.service';
+import { environment } from '../../environments/environment.development';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +15,7 @@ import { filter } from 'rxjs';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
+  private authService = inject(AuthService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
 
@@ -20,7 +23,7 @@ export class HeaderComponent {
   subtitle = signal('Bem-vindo');
   icon = signal('lucideBookOpen');
 
-  showLoginBtn = signal(true);
+  isAuthenticated = this.authService.isAuthenticated;
 
   constructor() {
     this.router.events
@@ -41,6 +44,13 @@ export class HeaderComponent {
     this.title.set(data['title'] || 'App Livraria');
     this.subtitle.set(data['subtitle'] || '');
     this.icon.set(data['icon'] || 'lucideBookOpen');
-    this.showLoginBtn.set(data['showLoginButton'] !== false);
+  }
+
+  async login() {
+    this.authService.login();
+  }
+
+  async logout() {
+    this.authService.logout();
   }
 }

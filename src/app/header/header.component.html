@@ -7,10 +7,14 @@
       <h2>{{ title() }}</h2>
       <p>{{ subtitle() }}</p>
     </div>
-    @if (showLoginBtn()) {
-      <a href="/login" class="loginButton">
+    @if (!isAuthenticated()) {
+      <button (click)="login()" class="loginButton">
         Login
-      </a>
+      </button>
+    } @else {
+      <button (click)="logout()" class="loginButton">
+        Logout
+      </button>
     }
   </div>
 </header>

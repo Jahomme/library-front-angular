@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { BooksComponent } from './books/books.component';
+import { AuthorizedComponent } from './features/authorized/authorized.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +20,16 @@ export const routes: Routes = [
     data: {
       title: 'Login',
       subtitle: 'Realize login para gerenciar',
+      icon: 'lucideLogIn',
+      showLoginButton: false,
+    },
+  },
+  {
+    path: 'authorized',
+    component: AuthorizedComponent,
+    data: {
+      title: 'Livraria',
+      subtitle: 'App para livros',
       icon: 'lucideLogIn',
       showLoginButton: false,
     },
