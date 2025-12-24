@@ -7,14 +7,20 @@
       <h2>{{ title() }}</h2>
       <p>{{ subtitle() }}</p>
     </div>
-    @if (!isAuthenticated()) {
-      <button (click)="login()" class="loginButton">
-        Login
-      </button>
-    } @else {
-      <button (click)="logout()" class="loginButton">
-        Logout
-      </button>
-    }
+    @if (currentUser(); as user) {
+     <div class="user-info">
+       <span>Olá, {{ user.sub }}</span>
+       <span class="email">{{ user.email }}</span>
+
+       @if (user.authorities.includes('ROLE_ADMIN')) {
+          <span class="badge">ADMIN</span>
+       }
+     </div>
+
+     <button class="loginButton" (click)="logout()">Sair</button>
+
+   } @else {
+     <button class="loginButton" (click)="login()">Entrar</button>
+   }
   </div>
 </header>

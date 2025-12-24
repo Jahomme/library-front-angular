@@ -1,28 +1,32 @@
 <div class="card">
   <div class="header">
     <div class="headerContent">
-      <p class="genre">{{ book.genero }}</p>
-      <h3 class="title">{{ book.titulo }}</h3>
+      <p class="genre">{{ book().genero }}</p>
+      <h3 class="title">{{ book().titulo }}</h3>
     </div>
   </div>
 
-  <p class="author">
+  <!-- <p class="author">
     Por <span class="authorName">{{ book.autor.nome }}</span>
-  </p>
+  </p> -->
 
   <div class="details">
     <div class="detailRow">
       <span class="label">Ano de publicação:</span>
-      <span class="value">{{ book.dataPublicacao | date }}</span>
+      <span class="value">{{ book().dataPublicacao | date }}</span>
     </div>
     <div class="detailRow">
       <span class="label">Páginas:</span>
       <span class="value">300</span>
     </div>
+    <div class="detailRow">
+      <span class="label">Preço:</span>
+      <span class="value">{{book().preco | currency : 'BRL' }}</span>
+    </div>
   </div>
 
 
-  <div class="rating">
+  <!-- <div class="rating">
     <span class="ratingText">5.0</span>
-  </div>
+  </div> -->
 </div>

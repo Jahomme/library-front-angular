@@ -23,6 +23,7 @@ export class HeaderComponent {
   subtitle = signal('Bem-vindo');
   icon = signal('lucideBookOpen');
 
+  currentUser = this.authService.currentUser;
   isAuthenticated = this.authService.isAuthenticated;
 
   constructor() {

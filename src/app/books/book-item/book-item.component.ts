@@ -1,14 +1,14 @@
-import { Component, Input } from '@angular/core';
-import { Book } from './book.model';
-import { DatePipe } from '@angular/common';
+import { Component, input } from '@angular/core';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { Book } from '../models/book.model';
 
 @Component({
   selector: 'app-book-item',
   standalone: true,
-  imports: [DatePipe],
+  imports: [DatePipe, CurrencyPipe],
   templateUrl: './book-item.component.html',
   styleUrl: './book-item.component.css',
 })
 export class BookItemComponent {
-  @Input({ required: true }) book!: Book;
+  book = input.required<Book>();
 }

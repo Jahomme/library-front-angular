@@ -3,7 +3,7 @@
     <div>
       <form (ngSubmit)="onSubmitBySearch()" class="searchBox">
         <ng-icon class="searchIcon" name="lucideSearch"/>
-        <input name="search" type="text" placeholder="Buscar por título ou autor" class="searchInput" [(ngModel)]="search"/>
+        <input name="search" type="text" placeholder="Buscar por título" class="searchInput" [(ngModel)]="search"/>
       </form>
     </div>
   </div>
@@ -25,13 +25,13 @@
 
   <div class="resultsInfo">
     <p class="resultsText">
-      Mostrando <span class="highlight">{{ books.length }}</span> de <span class="highlight">{{ books.length }}</span> livros
+      Mostrando <span class="highlight">{{ books().length }}</span> de <span class="highlight">{{ totalBooks() }}</span> livros
     </p>
   </div>
 
   <div class="books-container">
-    @if (books.length > 0) {
-      @for (book of books; track book.id) {
+    @if (books().length > 0) {
+      @for (book of books(); track book.id) {
         <app-book-item [book]="book"/>
       }
     } @else {

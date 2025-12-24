@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { tap } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
+import { UserPayload } from './user.model';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +16,14 @@ export class AuthService {
   private readonly CLIENT_ID = environment.oauth.clientId;
 
   isAuthenticated = signal(!!localStorage.getItem('access_token'));
+  currentUser = signal<UserPayload | null>(null);
+
+  constructor() {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      this.decodeAndNotify(token);
+    }
+  }
 
   generateCodeVerifier(): string {
     const array = new Uint8Array(32);
@@ -98,5 +108,14 @@ export class AuthService {
     return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   }
 
-  constructor() {}
+  private decodeAndNotify(token: string) {
+    try {
+      const payload = jwtDecode<UserPayload>(token);
+
+      this.currentUser.set(payload);
+    } catch (error) {
+      console.error('Erro ao decodificar token', error);
+      this.logout();
+    }
+  }
 }
