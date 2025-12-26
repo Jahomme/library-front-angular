@@ -4,6 +4,7 @@ import { Book } from './models/book.model';
 import { environment } from '../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { Page } from '../shared/models/page.model';
+import { CadastroLivroDTO } from './models/book-dto.model';
 
 @Injectable({
   providedIn: 'root',
@@ -48,5 +49,9 @@ export class BooksService {
     }
 
     return this.http.get<Page<Book>>(this.API_URL, { params });
+  }
+
+  salvar(livro: CadastroLivroDTO): Observable<void> {
+    return this.http.post<void>(this.API_URL, livro);
   }
 }

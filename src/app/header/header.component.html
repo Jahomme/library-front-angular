@@ -1,24 +1,26 @@
 <header>
   <div class="container">
-    <div class="icon-container">
-      <ng-icon [name]="icon()" size="32px" color="white"/>
-    </div>
-    <div class="text-container">
-      <h2>{{ title() }}</h2>
-      <p>{{ subtitle() }}</p>
+    <div class="pageInfoContainer">
+      <div class="icon-container">
+        <ng-icon [name]="icon()" size="32px" color="white"/>
+      </div>
+      <div class="text-container">
+        <h2>{{ title() }}</h2>
+        <p>{{ subtitle() }}</p>
+      </div>
     </div>
     @if (currentUser(); as user) {
-     <div class="user-info">
-       <span>Olá, {{ user.sub }}</span>
-       <span class="email">{{ user.email }}</span>
+      <div class="userContainer">
+        <div class="userButton">
+          <span class="userName">Olá, {{ user.sub }}</span>
 
-       @if (user.authorities.includes('ROLE_ADMIN')) {
-          <span class="badge">ADMIN</span>
-       }
-     </div>
+          @if (user.authorities.includes('ROLE_ADMIN')) {
+              <span class="badge">ADMIN</span>
+          }
+        </div>
 
-     <button class="loginButton" (click)="logout()">Sair</button>
-
+        <button class="loginButton" (click)="logout()">Sair</button>
+      </div>
    } @else {
      <button class="loginButton" (click)="login()">Entrar</button>
    }

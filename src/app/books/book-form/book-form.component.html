@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="header">
+    <button class="backButton" (click)="goBack()">
+      <ng-icon name="lucideArrowLeft" class="backIcon"></ng-icon>
+      Voltar
+    </button>
+  </div>
+
+  <div class="formContainer">
+    <div class="formHeader">
+      <ng-icon name="lucideBookOpen" class="bookIcon"></ng-icon>
+      <h1 class="title">{{ isEdit ? "Editar Livro" : "Novo Livro" }}</h1>
+      <p class="subtitle">Preencha os dados conforme o padrão ISBN</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+      <div class="formGrid">
+
+        <div class="formGroup">
+          <label for="titulo" class="label">Título</label>
+          <input type="text" id="titulo" formControlName="titulo" class="input" placeholder="Ex: O Senhor dos Anéis" />
+        </div>
+
+        <div class="formGroup">
+          <label for="isbn" class="label">ISBN</label>
+          <input type="text" id="isbn" formControlName="isbn" class="input" placeholder="Ex: 978-3-16-148410-0" />
+        </div>
+
+        <div class="formGroup">
+          <label for="preco" class="label">Preço (R$)</label>
+          <input type="number" id="preco" formControlName="preco" class="input" placeholder="0.00" step="0.01" />
+        </div>
+
+        <div class="formGroup">
+          <label for="dataPublicacao" class="label">Data de Publicação</label>
+          <input type="date" id="dataPublicacao" formControlName="dataPublicacao" class="input" />
+        </div>
+
+        <div class="formGroup">
+          <label for="genero" class="label">Gênero</label>
+          <select id="genero" formControlName="genero" class="select">
+            <option value="">Selecione...</option>
+            <option value="TECNOLOGIA">Tecnologia</option>
+            <option value="FICCAO">Ficção</option>
+            <option value="ROMANCE">Romance</option>
+            <option value="FANTASIA">Fantasia</option>
+            <option value="BIOGRAFIA">Biografia</option>
+          </select>
+        </div>
+
+        <div class="formGroup">
+          <label for="idAutor" class="label">Autor</label>
+          <select id="idAutor" formControlName="idAutor" class="select">
+            <option value="">Selecione um autor...</option>
+            @for (autor of autores(); track autor.id) {
+              <option [value]="autor.id">{{ autor.nome }}</option>
+            }
+          </select>
+        </div>
+
+      </div>
+
+      <div class="formActions">
+        <button type="button" (click)="goBack()" class="cancelButton">Cancelar</button>
+        <button type="submit" class="submitButton" [disabled]="form.invalid || form.pristine">
+          <ng-icon name="lucideSave"></ng-icon>
+          Salvar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
