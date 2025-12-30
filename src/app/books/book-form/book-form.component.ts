@@ -6,7 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBookOpen, lucideArrowLeft } from '@ng-icons/lucide';
 import { Book } from '../models/book.model';
@@ -29,6 +29,7 @@ export class BookFormComponent implements OnInit {
   private location = inject(Location);
 
   private autoresService = inject(AutorService);
+  private route = inject(ActivatedRoute);
   private booksService = inject(BooksService);
 
   readonly autores = signal<Autor[]>([]);
@@ -37,26 +38,49 @@ export class BookFormComponent implements OnInit {
   @Input() isEdit = false;
 
   form!: FormGroup;
+  bookId?: string;
 
   ngOnInit(): void {
     this.initForm();
 
     this.autoresService.listarAutores().subscribe({
       next: (data) => {
-        this.autores.set(data);
+        const lista = data;
+        this.autores.set(lista);
       },
       error: (erro) => {
-        console.error('Erro ao buscar autores:', erro);
+        console.error('Erro ao carregar autores:', erro);
       },
     });
 
-    if (this.book) {
-      this.form.patchValue(this.book);
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (id) {
+      this.isEdit = true;
+      this.bookId = id;
+
+      this.booksService.getById(id).subscribe({
+        next: (book) => {
+          this.form.patchValue({
+            id: book.id,
+            titulo: book.titulo,
+            isbn: book.isbn,
+            preco: book.preco,
+            dataPublicacao: book.dataPublicacao,
+            genero: book.genero,
+            idAutor: book.autor.id,
+          });
+        },
+        error: (err) => {
+          console.error('Erro ao carregar livro', err);
+        },
+      });
     }
   }
 
   private initForm() {
     this.form = this.fb.group({
+      id: [null],
       titulo: ['', [Validators.required]],
       isbn: ['', [Validators.required]],
       preco: [null, [Validators.required, Validators.min(0)]],
@@ -71,22 +95,31 @@ export class BookFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.valid) {
-      const dto: CadastroLivroDTO = this.form.value;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
-      console.log('Enviando DTO:', dto);
+    const dto: CadastroLivroDTO = this.form.value;
 
+    if (this.isEdit && this.bookId) {
+      this.booksService.atualizar(dto).subscribe({
+        next: () => {
+          this.router.navigate(['/livros']);
+        },
+        error: (erro) => {
+          console.error('Erro ao atualizar:', erro);
+        },
+      });
+    } else {
       this.booksService.salvar(dto).subscribe({
         next: () => {
-          console.log('Livro salvo com sucesso!');
           this.router.navigate(['/livros']);
         },
         error: (erro) => {
           console.error('Erro ao salvar:', erro);
         },
       });
-    } else {
-      this.form.markAllAsTouched();
     }
   }
 }

@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { BooksService } from './books.service';
 import { GenrePipe } from './genre.pipe';
 import { Book } from './models/book.model';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ConfirmationModalComponent } from '../shared/components/confirmation-modal/confirmation-modal.component';
 
 @Component({
@@ -34,6 +34,7 @@ import { ConfirmationModalComponent } from '../shared/components/confirmation-mo
 export class BooksComponent implements OnInit {
   protected booksService = inject(BooksService);
 
+  private router = inject(Router);
   books = signal<Book[]>([]);
   totalBooks = signal<number>(0);
   deleteModalOpen = signal(false);
@@ -97,6 +98,10 @@ export class BooksComponent implements OnInit {
         },
       });
     }
+  }
+
+  onEdit(book: Book) {
+    this.router.navigate(['/book/edit', book.id]);
   }
 
   closeModal() {

@@ -1,4 +1,5 @@
 export interface CadastroLivroDTO {
+  id?: string;
   isbn: string;
   titulo: string;
   dataPublicacao: string;

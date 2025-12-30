@@ -38,6 +38,7 @@
       @for (book of books(); track book.id) {
         <app-book-item
            [book]="book"
+           (edit)="onEdit($event)"
            (delete)="onDeleteRequest(book.id!)">
         </app-book-item>
       }

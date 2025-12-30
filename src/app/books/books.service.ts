@@ -58,4 +58,12 @@ export class BooksService {
   excluir(bookId: string): Observable<void> {
     return this.http.delete<void>(`${this.API_URL}/${bookId}`);
   }
+
+  getById(id: string): Observable<Book> {
+    return this.http.get<Book>(`${this.API_URL}/${id}`);
+  }
+
+  atualizar(book: CadastroLivroDTO): Observable<void> {
+    return this.http.put<void>(`${this.API_URL}/${book.id}`, book);
+  }
 }

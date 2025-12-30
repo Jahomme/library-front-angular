@@ -39,8 +39,18 @@ export const routes: Routes = [
     path: 'book',
     component: BookFormComponent,
     data: {
-      title: 'Adicionar/Editar livro',
-      subtitle: 'Adicione ou atualize um livro',
+      title: 'Adicionar livro',
+      subtitle: 'Adicione um novo livro',
+      icon: 'lucideLogIn',
+      showLoginButton: false,
+    },
+  },
+  {
+    path: 'book/edit/:id',
+    component: BookFormComponent,
+    data: {
+      title: 'Editar livro',
+      subtitle: 'Atualize as informações de um livro',
       icon: 'lucideLogIn',
       showLoginButton: false,
     },

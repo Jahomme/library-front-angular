@@ -1,4 +1,5 @@
 import { GeneroLivro } from "../../enum/generos";
+import { Autor } from '../../features/autores/models/autores.model';
 
 export interface Book {
   id?: string;
@@ -7,4 +8,5 @@ export interface Book {
   dataPublicacao: string;
   genero: GeneroLivro;
   preco: number;
+  autor: Autor;
 }
