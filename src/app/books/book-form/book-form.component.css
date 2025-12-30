@@ -159,6 +159,9 @@
 .submitButton {
   background-color: #2563eb;
   color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .submitButton:hover {

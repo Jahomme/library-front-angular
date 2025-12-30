@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideBookOpen, lucideArrowLeft } from '@ng-icons/lucide';
+import { lucideBookOpen, lucideArrowLeft, lucideSave } from '@ng-icons/lucide';
 import { Book } from '../models/book.model';
 import { AutorService } from '../../features/autores/autores.service';
 import { Autor } from '../../features/autores/models/autores.model';
@@ -19,7 +19,7 @@ import { CadastroLivroDTO } from '../models/book-dto.model';
   selector: 'app-book-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, NgIcon],
-  providers: [provideIcons({ lucideBookOpen, lucideArrowLeft })],
+  providers: [provideIcons({ lucideBookOpen, lucideArrowLeft, lucideSave })],
   templateUrl: './book-form.component.html',
   styleUrl: './book-form.component.css',
 })
