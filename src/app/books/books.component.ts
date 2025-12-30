@@ -1,18 +1,33 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { BookItemComponent } from './book-item/book-item.component';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideFilter, lucideSearch } from '@ng-icons/lucide';
+import { lucideFilter, lucidePlus, lucideSearch } from '@ng-icons/lucide';
 import { GeneroLivro } from '../enum/generos';
 import { FormsModule } from '@angular/forms';
 import { BooksService } from './books.service';
 import { GenrePipe } from './genre.pipe';
 import { Book } from './models/book.model';
+import { RouterLink } from '@angular/router';
+import { ConfirmationModalComponent } from '../shared/components/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-books',
   standalone: true,
-  imports: [BookItemComponent, NgIcon, FormsModule, GenrePipe],
-  providers: [provideIcons({ lucideSearch, lucideFilter })],
+  imports: [
+    BookItemComponent,
+    NgIcon,
+    FormsModule,
+    GenrePipe,
+    RouterLink,
+    ConfirmationModalComponent,
+  ],
+  providers: [
+    provideIcons({
+      lucideSearch,
+      lucideFilter,
+      lucidePlus,
+    }),
+  ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.css',
 })
@@ -21,6 +36,8 @@ export class BooksComponent implements OnInit {
 
   books = signal<Book[]>([]);
   totalBooks = signal<number>(0);
+  deleteModalOpen = signal(false);
+  itemToDelete = signal<string | null>(null);
 
   genres: string[] = Object.keys(GeneroLivro).filter((k) => Number.isNaN(+k));
 
@@ -36,6 +53,11 @@ export class BooksComponent implements OnInit {
         console.error('Erro ao buscar livros:', erro);
       },
     });
+  }
+
+  onDeleteRequest(id: string) {
+    this.itemToDelete.set(id);
+    this.deleteModalOpen.set(true);
   }
 
   onSubmitBySearch() {
@@ -62,7 +84,35 @@ export class BooksComponent implements OnInit {
     });
   }
 
+  onConfirmDelete() {
+    const id = this.itemToDelete();
+    if (id) {
+      this.booksService.excluir(id).subscribe({
+        next: () => {
+          this.atualizarLista();
+          this.closeModal();
+        },
+        error: () => {
+          this.closeModal();
+        },
+      });
+    }
+  }
+
+  closeModal() {
+    this.deleteModalOpen.set(false);
+    this.itemToDelete.set(null);
+  }
+
   isSelected(genre: string) {
     return this.booksService.isSelected(genre);
+  }
+
+  private atualizarLista() {
+    this.booksService.listarLivros().subscribe({
+      next: (data) => {
+        this.books.set(data.content);
+      },
+    });
   }
 }

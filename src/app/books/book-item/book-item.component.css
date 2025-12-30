@@ -106,3 +106,50 @@
   font-weight: 500;
   color: #1f2937;
 }
+
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  margin-top: auto; /* Garante que fique no fundo */
+}
+
+.editButton,
+.deleteButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.editButton {
+  background-color: #eff6ff;
+  color: #2563eb;
+}
+
+.editButton:hover {
+  background-color: #dbeafe;
+}
+
+.deleteButton {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.deleteButton:hover {
+  background-color: #fee2e2;
+}
+
+.buttonIcon {
+  font-size: 1rem;
+}

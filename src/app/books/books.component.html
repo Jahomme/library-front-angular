@@ -27,12 +27,19 @@
     <p class="resultsText">
       Mostrando <span class="highlight">{{ books().length }}</span> de <span class="highlight">{{ totalBooks() }}</span> livros
     </p>
+    <div class="addButtonContainer">
+      <ng-icon class="addIcon" name="lucidePlus"/>
+      <a class="addButton" routerLink="/book">Adicionar livro</a>
+    </div>
   </div>
 
   <div class="books-container">
     @if (books().length > 0) {
       @for (book of books(); track book.id) {
-        <app-book-item [book]="book"/>
+        <app-book-item
+           [book]="book"
+           (delete)="onDeleteRequest(book.id!)">
+        </app-book-item>
       }
     } @else {
       <div class="empty">
@@ -41,3 +48,12 @@
     }
   </div>
 </div>
+
+@if (deleteModalOpen()) {
+  <app-confirmation-modal
+    title="Excluir Livro"
+    message="Tem certeza que deseja excluir este livro? Essa ação não pode ser desfeita."
+    (confirm)="onConfirmDelete()"
+    (cancel)="closeModal()"
+  ></app-confirmation-modal>
+}

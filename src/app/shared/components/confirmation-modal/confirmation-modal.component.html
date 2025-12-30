@@ -1,0 +1,18 @@
+<div class="backdrop" (click)="cancel.emit()">
+  <div class="modal" (click)="$event.stopPropagation()">
+
+    <div class="modal-header">
+      <h3>{{ title() }}</h3>
+    </div>
+
+    <div class="modal-body">
+      <p>{{ message() }}</p>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="cancel.emit()">Cancelar</button>
+      <button class="btn-confirm" (click)="confirm.emit()">Confirmar Exclusão</button>
+    </div>
+
+  </div>
+</div>

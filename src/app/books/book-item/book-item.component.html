@@ -26,7 +26,17 @@
   </div>
 
 
-  <!-- <div class="rating">
-    <span class="ratingText">5.0</span>
-  </div> -->
+  <div class="actions">
+
+    <button class="editButton" (click)="edit.emit(book())">
+      <ng-icon name="lucidePencil" class="buttonIcon"></ng-icon>
+      Editar
+    </button>
+
+    <button class="deleteButton" (click)="delete.emit(book().id!)">
+      <ng-icon name="lucideTrash2" class="buttonIcon"></ng-icon>
+      Excluir
+    </button>
+
+  </div>
 </div>

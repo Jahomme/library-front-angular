@@ -54,4 +54,8 @@ export class BooksService {
   salvar(livro: CadastroLivroDTO): Observable<void> {
     return this.http.post<void>(this.API_URL, livro);
   }
+
+  excluir(bookId: string): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/${bookId}`);
+  }
 }
