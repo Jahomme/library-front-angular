@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Autor } from './models/autores.model';
 import { environment } from '../../../environments/environment.development';
+import { CadastroAutorDTO } from './models/autor-dto.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,5 +18,21 @@ export class AutorService {
       .set('size', size.toString());
 
     return this.http.get<Autor[]>(this.API_URL, { params });
+  }
+
+  salvar(dto: CadastroAutorDTO): Observable<void> {
+    return this.http.post<void>(this.API_URL, dto);
+  }
+
+  atualizar(dto: CadastroAutorDTO): Observable<void> {
+    return this.http.put<void>(`${this.API_URL}/${dto.id}`, dto);
+  }
+
+  getById(id: string): Observable<Autor> {
+    return this.http.get<Autor>(`${this.API_URL}/${id}`);
+  }
+
+  excluir(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/${id}`);
   }
 }

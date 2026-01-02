@@ -1,5 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterLink,
+} from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideBookOpen, lucideLogIn, lucideSettings } from '@ng-icons/lucide';
 import { filter } from 'rxjs';
@@ -9,7 +14,7 @@ import { environment } from '../../environments/environment.development';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgIcon],
+  imports: [NgIcon, RouterLink],
   providers: [provideIcons({ lucideBookOpen, lucideLogIn, lucideSettings })],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',

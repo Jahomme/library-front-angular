@@ -1,0 +1,120 @@
+/* Copiado e adaptado do React */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.header {
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.avatar {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 3px solid #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 auto 1rem;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.content {
+  padding: 1.5rem;
+  flex-grow: 1;
+}
+
+.biography {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.detailIcon {
+  /* ng-icon ajusta size via font-size ou style, aqui forçamos width/height */
+  font-size: 1rem;
+  color: #2563eb;
+}
+
+.actions {
+  display: flex;
+  border-top: 1px solid #e5e7eb;
+}
+
+.editButton,
+.deleteButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none; /* Para o link parecer botão */
+}
+
+.editButton {
+  background-color: #ffffff;
+  color: #2563eb;
+}
+
+.editButton:hover {
+  background-color: #eff6ff;
+}
+
+.deleteButton {
+  background-color: #ffffff;
+  color: #dc2626;
+  border-left: 1px solid #e5e7eb;
+}
+
+.deleteButton:hover {
+  background-color: #fef2f2;
+}
+
+.actionIcon {
+  font-size: 1rem;
+}

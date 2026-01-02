@@ -1,0 +1,55 @@
+<div class="page">
+  <main class="main">
+    <div class="container">
+
+      <div class="topBar">
+        <div class="searchWrapper">
+          <ng-icon name="lucideSearch" class="searchIcon"></ng-icon>
+          <input
+            type="text"
+            placeholder="Buscar autores..."
+            [ngModel]="searchTerm()"
+            (ngModelChange)="searchTerm.set($event)"
+            class="searchInput"
+          />
+        </div>
+
+        <div class="actions">
+          <a routerLink="/home" class="booksButton">
+            <ng-icon name="lucideBookOpen" class="buttonIcon"></ng-icon>
+            <span>Livros</span>
+          </a>
+          <a routerLink="/autores/novo" class="addButton">
+            <ng-icon name="lucidePlus" class="buttonIcon"></ng-icon>
+            <span>Adicionar Autor</span>
+          </a>
+        </div>
+      </div>
+
+      @if (filteredAutores().length > 0) {
+        <div class="grid">
+          @for (autor of filteredAutores(); track autor.id) {
+            <app-autor-item
+              [autor]="autor"
+              (delete)="onDeleteRequest($event)">>
+            </app-autor-item>
+          }
+        </div>
+      } @else {
+        <div class="emptyState">
+          <p class="emptyText">Nenhum autor encontrado</p>
+        </div>
+      }
+
+    </div>
+  </main>
+</div>
+
+@if (deleteModalOpen()) {
+  <app-confirmation-modal
+    title="Excluir Autor"
+    message="Tem certeza que deseja excluir este autor? Se ele tiver livros vinculados, a exclusão será bloqueada."
+    (confirm)="onConfirmDelete()"
+    (cancel)="closeModal()"
+  ></app-confirmation-modal>
+}

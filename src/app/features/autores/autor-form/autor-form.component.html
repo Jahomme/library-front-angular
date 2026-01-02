@@ -1,0 +1,77 @@
+<div class="page">
+  <main class="main">
+    <div class="container">
+      <div class="formCard">
+        <h2 class="formTitle">Adicionar Novo Autor</h2>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+
+          <div class="formGroup">
+            <label for="nome" class="label">
+              Nome do Autor *
+            </label>
+            <input
+              type="text"
+              id="nome"
+              formControlName="nome"
+              class="input"
+              placeholder="Ex: Machado de Assis"
+              [class.inputError]="form.get('nome')?.invalid && form.get('nome')?.touched"
+            />
+            @if (form.get('nome')?.invalid && form.get('nome')?.touched) {
+              <p class="errorText">Nome é obrigatório</p>
+            }
+          </div>
+
+          <div class="formRow">
+            <div class="formGroup">
+              <label for="dataNascimento" class="label">
+                Data de Nascimento
+              </label>
+              <input
+                type="date"
+                id="dataNascimento"
+                formControlName="dataNascimento"
+                class="input"
+                [class.inputError]="form.get('dataNascimento')?.invalid && form.get('dataNascimento')?.touched"
+              />
+              @if (form.get('dataNascimento')?.invalid && form.get('dataNascimento')?.touched) {
+                <p class="errorText">Data inválida</p>
+              }
+            </div>
+
+            <div class="formGroup">
+              <label for="nacionalidade" class="label">
+                Nacionalidade
+              </label>
+              <input
+                type="text"
+                id="nacionalidade"
+                formControlName="nacionalidade"
+                class="input"
+                placeholder="Ex: Brasileiro"
+                [class.inputError]="form.get('nacionalidade')?.invalid && form.get('nacionalidade')?.touched"
+              />
+              @if (form.get('nacionalidade')?.invalid && form.get('nacionalidade')?.touched) {
+                <p class="errorText">Nacionalidade é obrigatória</p>
+              }
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="button" (click)="goBack()" class="cancelButton">
+              <ng-icon name="lucideX" class="buttonIcon"></ng-icon>
+              Cancelar
+            </button>
+
+            <button type="submit" class="submitButton" [disabled]="form.invalid">
+              <ng-icon name="lucideSave" class="buttonIcon"></ng-icon>
+              Salvar Autor
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </main>
+</div>

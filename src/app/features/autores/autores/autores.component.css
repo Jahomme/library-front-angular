@@ -1,0 +1,124 @@
+.page {
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+.main {
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.topBar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.searchWrapper {
+  position: relative;
+  flex: 1;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.25rem;
+  color: #9ca3af;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+  box-sizing: border-box; /* Importante para input não estourar */
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.booksButton,
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  border: none;
+}
+
+.booksButton {
+  background-color: #6b7280;
+  color: #ffffff;
+}
+
+.booksButton:hover {
+  background-color: #4b5563;
+}
+
+.addButton {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.addButton:hover {
+  background-color: #1d4ed8;
+}
+
+.buttonIcon {
+  font-size: 1.25rem;
+}
+
+/* --- GRID DA LISTAGEM --- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.emptyText {
+  font-size: 1.125rem;
+  color: #6b7280;
+}
+
+@media (min-width: 768px) {
+  .topBar {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

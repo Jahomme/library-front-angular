@@ -1,0 +1,32 @@
+<div class="card">
+  <div class="header">
+    <div class="avatar">{{ autor().nome.charAt(0) }}</div>
+    <h3 class="title">{{ autor().nome }}</h3>
+  </div>
+
+  <div class="content">
+    <div class="details">
+      <div class="detail">
+        <ng-icon name="lucideCalendar" class="detailIcon"></ng-icon>
+        <span>{{ autor().dataNascimento | date : 'yyyy' }}</span>
+      </div>
+
+      <div class="detail">
+        <ng-icon name="lucideGlobe" class="detailIcon"></ng-icon>
+        <span>{{ autor().nacionalidade }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <a [routerLink]="['/autores/edit', autor().id]" class="editButton">
+      <ng-icon name="lucidePencil" class="actionIcon"></ng-icon>
+      Editar
+    </a>
+
+    <button (click)="delete.emit(autor().id!)" class="deleteButton">
+      <ng-icon name="lucideTrash2" class="actionIcon"></ng-icon>
+      Excluir
+    </button>
+  </div>
+</div>
