@@ -1,0 +1,3 @@
+- Toast de erro na auth ao redirecionar para a home
+- melhorar expericência do user
+- Resolver problema do login bugado
